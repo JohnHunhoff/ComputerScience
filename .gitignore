@@ -4,3 +4,6 @@ __pycache__
 %SystemDrive%
 algorithms/out
 algorithms/venv
+.gitignore
+out
+algorithms/out
