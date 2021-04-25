@@ -1,62 +1,43 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class BinarySearch {
     public static void main(String[] args) {
+        List<Integer> integerArrayList = new ArrayList<>();
+        integerArrayList.add(80); // 3
+        integerArrayList.add(21); // 2
+        integerArrayList.add(8);  // 1
+        integerArrayList.add(95); // 4
+        integerArrayList.add(1);  // 0
+        Collections.sort(integerArrayList);
 
-        int[] orderedList = {87, 21, 45, 93};
-
-        System.out.println(binarySearch(orderedList, 87));
+        System.out.println(binarySearch(integerArrayList, 80));
     }
 
-    public static int binarySearch(int[] list, int item) {
-        if (listEmpty(list)) { return -1; }
-
-        int lowIndex = 0;
-        int highIndex = list.length - 1;
-
-        while (lowIndex <= highIndex) {
-            int midIndex = (lowIndex + highIndex) / 2;
-            int kick = list[midIndex];
-
-            if (isEquals(kick, item)) {
-                return midIndex;
-            } else if (isGreaterThan(kick, item)) {
-                highIndex = midIndex - 1;
-            } else if (isLessThan(kick, item)) {
-                lowIndex = midIndex + 1;
-            }
+    public static int binarySearch(List<Integer> list, int number) {
+        if (list.isEmpty()) {
+            return -1;
         }
 
+        int lowIndex = 0;
+        int highIndex = list.size() - 1;
+
+        while (lowIndex <= highIndex) {
+            int guess = (lowIndex + highIndex) / 2;
+            int kick = list.get(guess);
+
+            if (kick == number) {
+                return guess;
+            } else if (kick < number) {
+                lowIndex = guess;
+            } else if (kick > number) {
+                highIndex = guess;
+            }
+
+        }
         return -1;
     }
 
-    public static boolean listEmpty(int[] list) {
-        int sizeOfList = list.length;
-        if (sizeOfList == 0) {
-            return true;
-        }
-        return false;
     }
 
-    public static boolean isEquals(int kick, int item) {
-        if (kick != item) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isGreaterThan(int kick, int item) {
-        if ( kick < item) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isLessThan(int kick, int item) {
-        if (kick > item) {
-            return false;
-        }
-        return true;
-    }
-
-
-
-}
